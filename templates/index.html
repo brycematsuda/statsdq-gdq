@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Stats Done Quick for Games Done Quick</title>
+</head>
+<body>
+  <h1>Stats Done Quick for Games Done Quick</h1>
+  <p>This was made for fans/viewers of Speed Demo Archive's charity marathons who want quick, up-to-date information about runs, donations and incentives without being forced to either listen to the Twitch stream, wait for the ticker, or go into IRC chat. As such, the Twitch stream nor the IRC chat will not be embedded here. It can be found on the <a href="https://gamesdonequick.com/">Games Done Quick official website</a>.</p>
+
+  <h2>Donations Stats</h2>
+  <p>{{ soup.find_all('li')[0].find_all('b')[3].text }} /  {{ soup.find_all('li')[0].find_all('b')[4].text }}</p>
+  <p><a href="https://gamesdonequick.com/tracker/donate/12">Click here to donate</a></p>
+
+  <h2>Current Game</h2>
+  <p>Coming soon... (need to grab from Twitch API or schedule)</p>
+
+  <h2>Upcoming Runs</h2>
+  <ul>
+    <li>{{soup.find_all('li')[2].text}}</li>
+    <li>{{soup.find_all('li')[3].text}}</li>
+    <li>{{soup.find_all('li')[4].text}}</li>
+  </ul>
+
+  <h2>Eligible Prizes for Current Run</h2>
+  <ul>
+    {% for item in soup.find_all('li', 'li-blue') %}
+    {% if "Eligible Prizes" not in item.text -%}
+    <li>{{ item.text }}</li>
+    {% endif %}
+    {% endfor %}
+  </ul>
+
+  <h2>Current Donation Incentives</h2>
+  <p>Coming soon... (need to grab from tracker)</p>
+</body>
+</html>
