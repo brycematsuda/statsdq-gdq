@@ -1,8 +1,18 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>Stats Done Quick for Games Done Quick</title>
+  <title>Current Game: {{ json['game'] }} - Stats Done Quick for Games Done Quick</title>
   <link rel="stylesheet" href="/static/bower_components/bootstrap/dist/css/bootstrap.min.css" />
+  <link rel="stylesheet" href="/static/bower_components/jquery-ui/themes/smoothness/jquery-ui.min.css" />
+  <script src="/static/bower_components/jquery/dist/jquery.min.js"></script>
+  <script src="/static/bower_components/jquery-ui/jquery-ui.min.js"></script>
+  <script>
+    $(function() {
+      $( "#progressbar" ).progressbar({
+        value: {{ progBarVal }}
+      });
+    });
+  </script>
 </head>
 <body>
   <div class="container">
@@ -10,49 +20,49 @@
     <p>This was made for fans/viewers of Speed Demo Archive's charity marathons who want quick, up-to-date information about runs, donations and incentives without being forced to either listen to the Twitch stream, wait for the ticker, or go into IRC chat. As such, the Twitch stream nor the IRC chat will not be embedded here. It can be found on the <a href="https://gamesdonequick.com/">Games Done Quick official website</a>.</p>
 
     <h2>Donations Stats</h2>
-    <p>{{ soup.find_all('li')[0].find_all('b')[3].text }} /  {{ soup.find_all('li')[0].find_all('b')[4].text }}</p>
+    <div id="progressbar"></div>
+    <p>Total Donations: {{ soup.find_all('li')[0].find_all('b')[3].text }} / Goal: {{ soup.find_all('li')[0].find_all('b')[4].text }}</p>
     <p><a href="https://gamesdonequick.com/tracker/donate/12">Click here to donate</a></p>
 
     <h2><a href="http://time.is/Virginia" id="time_is_link" rel="nofollow" style="font-size:36px">Time in Virginia:</a>
-    <span id="Virginia_z161" style="font-size:36px"></span></h2>
-    <script src="http://widget.time.is/t.js"></script>
-    <script>
-      time_is_widget.init({Virginia_z161:{}});
-    </script>
+      <span id="Virginia_z161" style="font-size:36px"></span></h2>
+      <script src="http://widget.time.is/t.js"></script>
+      <script>
+        time_is_widget.init({Virginia_z161:{}});
+      </script>
 
-    <h2>Current Game: {{ json['game'] }} (scheduled start time: {{ soupSched.find(text=json['game']).parent.parent.contents[1].text }} EST)</h2>
-    <ul>
-      <li>Runners: {{ soupSched.find(text=json['game']).parent.parent.contents[5].text }}</li>
-      <li>Twitch Channels: {{ soupSched.find(text=json['game']).parent.parent.contents[19].text }}</li>
-      <li>Console: {{ soupSched.find(text=json['game']).parent.parent.contents[7].text }}</li>
-      <li>Estimate: {{ soupSched.find(text=json['game']).parent.parent.contents[9].text }}</li>
-      <li>Setup: {{ soupSched.find(text=json['game']).parent.parent.contents[11].text }}</li>
-      <li>Comments: {{ soupSched.find(text=json['game']).parent.parent.contents[13].text }}</li>
-      <li>Couch Commentators: {{ soupSched.find(text=json['game']).parent.parent.contents[15].text }}</li>
-    </ul>
+      <h2>Current Game: {{ json['game'] }} (scheduled start time: {{ soupSched.find(text=json['game']).parent.parent.contents[1].text }} EST)</h2>
+      <ul>
+        <li>Runner(s): {{ soupSched.find(text=json['game']).parent.parent.contents[5].text }}</li>
+        <li>Twitch Channels: {{ soupSched.find(text=json['game']).parent.parent.contents[19].text }}</li>
+        <li>Console: {{ soupSched.find(text=json['game']).parent.parent.contents[7].text }}</li>
+        <li>Estimate: {{ soupSched.find(text=json['game']).parent.parent.contents[9].text }}</li>
+        <li>Setup: {{ soupSched.find(text=json['game']).parent.parent.contents[11].text }}</li>
+        <li>Comments: {{ soupSched.find(text=json['game']).parent.parent.contents[13].text }}</li>
+        <li>Couch Commentators: {{ soupSched.find(text=json['game']).parent.parent.contents[15].text }}</li>
+      </ul>
 
-    <h2>Upcoming Runs</h2>
-    <ul>
-      {% for game in soup.find_all('li', 'li-red') -%}
-      {% if "Upcoming Runs" not in game.text -%}
-      <li>{{ game.text }}</li>
-      {% endif %}
-      {% endfor %}
-    </ul>
+      <h2>Upcoming Runs</h2>
+      <ul>
+        {% for game in soup.find_all('li', 'li-red') -%}
+        {% if "Upcoming Runs" not in game.text -%}
+        <li>{{ game.text }}</li>
+        {% endif %}
+        {% endfor %}
+      </ul>
 
-    <h2>Eligible Prizes for Current Run</h2>
-    <ul>
-      {% for item in soup.find_all('li', 'li-blue') %}
-      {% if "Eligible Prizes" not in item.text -%}
-      <li>{{ item.text }}</li>
-      {% endif %}
-      {% endfor %}
-    </ul>
+      <h2>Eligible Prizes for Current Run</h2>
+      <ul>
+        {% for item in soup.find_all('li', 'li-blue') %}
+        {% if "Eligible Prizes" not in item.text -%}
+        <li>{{ item.text }}</li>
+        {% endif %}
+        {% endfor %}
+      </ul>
 
-    <h2>Current Donation Incentives</h2>
-    <p>Coming soon... (need to grab from tracker)</p>
-  </div>
-  <script src="/static/bower_components/jquery/dist/jquery.min.js"></script>
-  <script src="/static/bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
-</body>
-</html>
+      <h2>Current Donation Incentives</h2>
+      <p>Coming soon... (need to grab from tracker)</p>
+    </div>
+    <script src="/static/bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
+  </body>
+  </html>
