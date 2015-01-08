@@ -1,0 +1,22 @@
+{
+  "name": "statsdq-gdq",
+  "version": "0.0.0",
+  "homepage": "https://github.com/brycematsuda/statsdq-gdq",
+  "authors": [
+    "Bryce Matsuda <iexist4jcore@gmail.com>"
+  ],
+  "description": "Quick stats on active SDA charity marathons.",
+  "license": "MIT",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "static/bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "bootstrap": "~3.3.1",
+    "jquery-ui": "~1.11.2"
+  }
+}
