@@ -1,7 +1,8 @@
+{% set currGame = soup.find('li','li-blue').find('i').text %}
 <!DOCTYPE html>
 <html>
 <head>
-  <title>Current Game: {{ json['game'] }} - Stats Done Quick for Games Done Quick</title>
+  <title>Current Game: {{ currGame }} - Stats Done Quick for Games Done Quick</title>
   <link rel="stylesheet" href="/static/bower_components/bootstrap/dist/css/bootstrap.min.css" />
   <link rel="stylesheet" href="/static/bower_components/jquery-ui/themes/smoothness/jquery-ui.min.css" />
   <script src="/static/bower_components/jquery/dist/jquery.min.js"></script>
@@ -21,7 +22,8 @@
 
     <h2>Donations Stats</h2>
     <div id="progressbar"></div>
-    <p>Total Donations: {{ soup.find_all('li')[0].find_all('b')[3].text }} / Goal: {{ soup.find_all('li')[0].find_all('b')[4].text }}</p>
+    {% set money = soup.find_all('li')[0].find_all('b') %}
+    <p>Total Donations: {{ money[3].text }} / Goal: {{ money[4].text }}</p>
     <p><a href="https://gamesdonequick.com/tracker/donate/12">Click here to donate</a></p>
 
     <h2><a href="http://time.is/Virginia" id="time_is_link" rel="nofollow" style="font-size:36px">Time in Virginia:</a>
@@ -31,15 +33,16 @@
         time_is_widget.init({Virginia_z161:{}});
       </script>
 
-      <h2>Current Game: {{ json['game'] }} (scheduled start time: {{ soupSched.find(text=json['game']).parent.parent.contents[1].text }} EST)</h2>
+      {% set currGameInfo = soupSched.find(text=currGame).parent.parent %}
+      <h2>Current Game: {{ currGame }} (scheduled start time: {{ currGameInfo.contents[1].text }} EST)</h2>
       <ul>
-        <li>Runner(s): {{ soupSched.find(text=json['game']).parent.parent.contents[5].text }}</li>
-        <li>Twitch Channels: {{ soupSched.find(text=json['game']).parent.parent.contents[19].text }}</li>
-        <li>Console: {{ soupSched.find(text=json['game']).parent.parent.contents[7].text }}</li>
-        <li>Estimate: {{ soupSched.find(text=json['game']).parent.parent.contents[9].text }}</li>
-        <li>Setup: {{ soupSched.find(text=json['game']).parent.parent.contents[11].text }}</li>
-        <li>Comments: {{ soupSched.find(text=json['game']).parent.parent.contents[13].text }}</li>
-        <li>Couch Commentators: {{ soupSched.find(text=json['game']).parent.parent.contents[15].text }}</li>
+        <li>Runner(s): {{ currGameInfo.contents[5].text }}</li>
+        <li>Twitch Channels: {{ currGameInfo.contents[19].text }}</li>
+        <li>Console: {{ currGameInfo.contents[7].text }}</li>
+        <li>Estimate: {{ currGameInfo.contents[9].text }}</li>
+        <li>Setup: {{ currGameInfo.contents[11].text }}</li>
+        <li>Comments: {{ currGameInfo.contents[13].text }}</li>
+        <li>Couch Commentators: {{ currGameInfo.contents[15].text }}</li>
       </ul>
 
       <h2>Upcoming Runs</h2>
