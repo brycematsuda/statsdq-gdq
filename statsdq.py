@@ -12,15 +12,6 @@ def downloadHTML(url):
   else:
     return ''
 
-def downloadJSON(url):
-  assert url.startswith('https://')
-  req = requests.get(url)
-  if req.status_code == 200:
-    return req.content
-  else:
-    return ''
-
-
 @app.route("/")
 def index():
   # Download ticker and schedule HTML
