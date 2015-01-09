@@ -33,7 +33,7 @@
         time_is_widget.init({Virginia_z161:{}});
       </script>
 
-      {% set currGameInfo = soupSched.find(text=currGame).parent.parent %}
+      {% set currGameInfo = schedCurrGame.parent.parent %}
       <h2>Current Game: {{ currGame }} (scheduled start time: {{ currGameInfo.contents[1].text }} EST)</h2>
       <ul>
         <li>Runner(s): {{ currGameInfo.contents[5].text }}</li>
