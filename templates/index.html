@@ -60,8 +60,8 @@
       {% for game in soup.find_all('li', 'li-red') -%}
       {% if "Upcoming Runs" not in game.text -%}
       <li>{{ game.text }}</li>
-      {%- endif %}
-      {%- endfor %}
+      {% endif %}
+      {% endfor %}
     </ul>
 
     <h2>Eligible Prizes for Current Run</h2>
@@ -69,8 +69,8 @@
       {% for item in soup.find_all('li', 'li-blue') -%}
       {% if "Eligible Prizes" not in item.text -%}
       <li>{{ item.text }}</li>
-      {%- endif %}
-      {%- endfor %}
+      {% endif %}
+      {% endfor %}
     </ul>
 
     <h2>Current Donation Incentives</h2>
