@@ -27,6 +27,7 @@ module.exports = function(grunt) {
         dest: 'static/css/libraries.css'
     }
 },
+
 cssmin: {
   target: {
     files: [{
@@ -38,6 +39,17 @@ cssmin: {
       ext: '.min.css'
   }]
 }
+},
+
+imagemin: {
+    dynamic: {
+        files: [{
+            expand: true,
+            cwd: 'static/css/images',
+            src: ['**/*.{png,jpg,gif}'],
+            dest: 'static/css/images'
+        }]
+    }
 },
 
 uglify: {
@@ -65,6 +77,7 @@ watch: {
     grunt.loadNpmTasks('grunt-contrib-uglify');
     grunt.loadNpmTasks('grunt-contrib-watch');
     grunt.loadNpmTasks('grunt-contrib-cssmin');
+    grunt.loadNpmTasks('grunt-contrib-imagemin');
 
     // 4. Where we tell Grunt what to do when we type "grunt" into the terminal.
     grunt.registerTask('default', ['concat', 'uglify', 'cssmin']);
