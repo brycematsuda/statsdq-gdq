@@ -16,7 +16,7 @@
 
     var datetime_update = function() {
       date = moment(new Date());
-      datetime.html(date.tz("America/New_York").format('[Time at AGDQ 2015 location: ] M/D/YYYY H:mm:ss [EST]'));
+      datetime.html(date.tz("America/New_York").format('[Current time at AGDQ 2015 location: ] M/D/YYYY H:mm:ss [EST]'));
     };
 
     $(document).ready(function() {
@@ -28,7 +28,9 @@
 </head>
 <body>
   <div class="container">
-    <h1>Stats Done Quick for Games Done Quick</h1>
+    <div class="page-header">
+      <h1>Stats Done Quick for Games Done Quick</h1>
+    </div>
     <p>This was made for fans/viewers of Speed Demo Archive's charity marathons who want quick, up-to-date information about runs, donations and incentives without being forced to either listen to the Twitch stream, wait for the ticker, or go into IRC chat. As such, the Twitch stream nor the IRC chat will not be embedded here. It can be found on the <a href="https://gamesdonequick.com/">Games Done Quick official website</a>.</p>
 
     <h2>Donations Stats</h2>
@@ -40,35 +42,36 @@
     <h2><div id="datetime"></div></h2>
 
     {% set currGameInfo = schedCurrGame.parent.parent -%}
-    <h2>Current Game: {{ currGame }} <small>(scheduled start time: {{ currGameInfo.contents[1].text }} EST)</small></h2>
-    <ul>
-      <li>Runner(s): {{ currGameInfo.contents[5].text }}</li>
-      <li>Twitch Channels: {{ currGameInfo.contents[19].text }}</li>
-      <li>Console: {{ currGameInfo.contents[7].text }}</li>
-      <li>Estimated Run Time: {{ currGameInfo.contents[9].text }}</li>
-      <li>Setup Time: {{ currGameInfo.contents[11].text }}</li>
+    <h2>Current Game: {{ currGame }}</h2>
+    <ul class="list-group">
+      <li class="list-group-item">Estimated Setup Time: {{ currGameInfo.contents[11].text }}</li>
+      <li class="list-group-item">Estimated Start Time: {{ currGameInfo.contents[1].text }} EST</li>
+      <li class="list-group-item">Estimated Run Time: {{ currGameInfo.contents[9].text }}</li>
+      <li class="list-group-item">Runner(s): {{ currGameInfo.contents[5].text }}</li>
+      <li class="list-group-item">Twitch Channels: {{ currGameInfo.contents[19].text }}</li>
+      <li class="list-group-item">Console: {{ currGameInfo.contents[7].text }}</li>
       {% if currGameInfo.contents[13].text -%}
-      <li>Comments: {{ currGameInfo.contents[13].text }}</li>
+      <li class="list-group-item">Comments: {{ currGameInfo.contents[13].text }}</li>
       {% endif %}
       {%- if currGameInfo.contents[15].text -%}
-      <li>Couch Commentators: {{ currGameInfo.contents[15].text }}</li>
+      <li class="list-group-item">Couch Commentators: {{ currGameInfo.contents[15].text }}</li>
       {%- endif %}
     </ul>
 
     <h2>Upcoming Runs</h2>
-    <ul>
+    <ul class="list-group">
       {% for game in soup.find_all('li', 'li-red') -%}
       {% if "Upcoming Runs" not in game.text -%}
-      <li>{{ game.text }}</li>
+      <li class="list-group-item">{{ game.text }}</li>
       {% endif %}
       {% endfor %}
     </ul>
 
     <h2>Eligible Prizes for Current Run</h2>
-    <ul>
+    <ul class="list-group">
       {% for item in soup.find_all('li', 'li-blue') -%}
       {% if "Eligible Prizes" not in item.text -%}
-      <li>{{ item.text }}</li>
+      <li class="list-group-item">{{ item.text }}</li>
       {% endif %}
       {% endfor %}
     </ul>
