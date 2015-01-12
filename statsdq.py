@@ -27,11 +27,17 @@ def index():
   progBarVal = (float(donTotal[1:]) / float(goal[1:])) * 100
 
   # Lookup ticker game with schedule slot. Convert to lower case because BS4 is case-sensitive by default
-  tickerGame = str(soup.find('li','li-blue').find('i').text).lower()
-  schedCurrGame = scheduleSoup.find(text=lambda x: x and x.lower()==tickerGame)
+  if soup.find_all('li','li-blue'):
+    tickerGame = str(soup.find('li','li-blue').find('i').text).lower()
+    schedCurrGame = scheduleSoup.find(text=lambda x: x and x.lower()==tickerGame)
+  else:
+    # We can't find the ticker game because the event is over, or the ticker is messed up.
+    tickerGame = ''
+    schedCurrGame = ''
 
   return render_template('index.html', soup=soup, soupSched=scheduleSoup, progBarVal=progBarVal, schedCurrGame=schedCurrGame)
 
 if __name__ == "__main__":
     port = int(os.environ.get("PORT", 5000))
+    app.debug = True
     app.run(host='0.0.0.0', port=port)
