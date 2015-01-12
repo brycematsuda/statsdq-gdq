@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Current Game: Kirby Super Star - Stats Done Quick for Games Done Quick</title>
+  <link rel="stylesheet" href="/static/css/libraries.min.css" />
+  <script src="/static/js/libraries.min.js"></script>
+  <script>
+    $(function() {
+      $( "#progressbar" ).progressbar({
+        value: 100
+      });
+    });
+
+    var datetime = null, date = null;
+
+    var datetime_update = function() {
+      date = moment(new Date());
+      datetime.html(date.tz("America/New_York").format('[Current time at AGDQ 2015 location: ] M/D/YYYY H:mm:ss [EST]'));
+    };
+
+    $(document).ready(function() {
+      datetime = $('#datetime');
+      datetime_update();
+      setInterval(datetime_update, 1000);
+    });
+  </script>
+</head>
+<body>
+  <div class="container">
+    <div class="page-header">
+      <h1>Stats Done Quick for Games Done Quick</h1>
+    </div>
+
+    <p><strong>Note: This is static, filler data for demonstration purposes, as the event has since ended. This will not be updated in real-time.</strong></p>
+
+    <p>This was made for fans/viewers of Speed Demo Archive's charity marathons who want quick, up-to-date information about runs, donations and incentives without being forced to either listen to the Twitch stream, wait for the ticker, or go into IRC chat. As such, the Twitch stream nor the IRC chat will not be embedded here. It can be found on the <a href="https://gamesdonequick.com/">Games Done Quick official website</a>.</p>
+
+    <h2>Donations Stats</h2>
+    <div id="progressbar"></div>
+    <p>Total Donations: $1000000 / Goal: $1000000</p>
+    <p><a href="https://gamesdonequick.com/tracker/donate/12">Click here to donate</a></p>
+
+    <h2><div id="datetime"></div></h2>
+
+    <h2>Current Game: Kirby Super Star</h2>
+    <ul class="list-group">
+      <li class="list-group-item">Estimated Setup Time: 0:09:54</li>
+      <li class="list-group-item">Estimated Start Time: 1/7/2015, 18:27:00 EST</li>
+      <li class="list-group-item">Estimated Run Time: 1:16:06</li>
+      <li class="list-group-item">Runner(s): 0xwas, usedpizza</li>
+      <li class="list-group-item">Twitch Channels: 0xwas</li>
+      <li class="list-group-item">Console: SNES</li>
+      <li class="list-group-item">Comments: 100% race</li>
+      <li class="list-group-item">Couch Commentators: Countdown42</li>
+    </ul>
+
+    <h2>Upcoming Runs</h2>
+    <ul class="list-group">
+      <li class="list-group-item">Shovel Knight by Capndrake</li>
+      <li class="list-group-item">Mega Man Unlimited by Slurpeeninja</li>
+      <li class="list-group-item">Mega Man by adefgames, coolkid, and dxtr</li>
+    </ul>
+
+    <h2>Eligible Prizes for Current Run</h2>
+    <ul class="list-group">
+      <li class="list-group-item">Item 1 - Min. Donation - $15.00</li>
+      <li class="list-group-item">Item 2 - Min. Donation - $5.00</li>
+      <li class="list-group-item">Item 3 - Min. Donation - $10.00</li>
+      <li class="list-group-item">Grand Prize - Min. Donation - $9000.00</li>
+    </ul>
+
+    <h2>Current Donation Incentives</h2>
+    <p>Coming soon... (need to grab from tracker somehow...)</p>
+  </div>
+</body>
+</html>

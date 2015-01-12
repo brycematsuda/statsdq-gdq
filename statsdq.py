@@ -37,6 +37,10 @@ def index():
 
   return render_template('index.html', soup=soup, soupSched=scheduleSoup, progBarVal=progBarVal, schedCurrGame=schedCurrGame)
 
+@app.route("/static-data")
+def static_data():
+  return render_template('static.html')
+
 if __name__ == "__main__":
     port = int(os.environ.get("PORT", 5000))
     app.debug = True
